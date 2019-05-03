@@ -1,0 +1,50 @@
+Assignment 1B:
+
+1.  What are Channels and Kernels (according to EVA)?
+>>   
+Channel also called as feature is a characteritics which represents the image.
+Channels can also be seen as the basic components which defines the image.
+For example, an image of a white car will have color white & Edges of the door as some of the channels.
+
+In order to extract these channels from an image, we need kernels.
+Kernels are also known as filters or feature extractors which basically scans the image and filters out
+the channel which the kernel suppose to filter.
+Each kernel can extract a particular kind of feature from the image.
+For the above example, we would need separate kernels for color white, horizontal/vertical/angular edge features.
+
+
+2.  Why should we only (well mostly) use 3x3 Kernels?
+>>  The most important reason for using 3x3 kernels is due to the fact that the GPU product industry have tuned their GPU product to
+accelerate the 3x3 kernel extracting features from the image. Due to the GPU demanding nature of the Deep Neural networks, it is wise 
+to stick to 3x3 kernel for high performance.
+
+
+3.  How many times do we need to perform 3x3 convolution operation to reach 1x1 from 199x199 (show calculations)
+>>  For example, when we perform 3x3 convolution on an image of size 5x5, we get a 3x3 channel output. This means that we loose 
+2 pixel from the x & y axis for every 3x3 convolution operation.
+
+For 199x199 image, the number of 3x3 convolution layers required to reach 1x1 would be [199/2], which is 99.5.
+After ignoring the decimal, we would need 99 layers.
+
+199x199 | 197x197 | 195x195 | 193x193 | 191x191 |   ...(5 layers)
+189x189 | 187x187 | 185x185 | 183x183 | 181x181 |   ...(5 layers)
+179x179 | 177x177 | 175x175 | 173x173 | 171x171 |   ...(5 layers)
+169x169 | 167x167 | 165x165 | 163x163 | 161x161 |   ...(5 layers)
+159x159 | 157x157 | 155x155 | 153x153 | 151x151 |   ...(5 layers)
+149x149 | 147x147 | 145x145 | 143x143 | 141x141 |   ...(5 layers)
+139x139 | 137x137 | 135x135 | 133x133 | 131x131 |   ...(5 layers)
+129x129 | 127x127 | 125x125 | 123x123 | 121x121 |   ...(5 layers)
+119x119 | 117x117 | 115x115 | 113x113 | 111x111 |   ...(5 layers)
+109x109 | 107x107 | 105x105 | 103x103 | 101x101 |   ...(5 layers)
+99x99 | 97x97 | 95x95 | 93x93 | 91x91 |             ...(5 layers)
+89x89 | 87x87 | 85x85 | 83x83 | 81x81 |             ...(5 layers)
+79x79 | 77x77 | 75x75 | 73x73 | 71x71 |             ...(5 layers)
+69x69 | 67x67 | 65x65 | 63x63 | 61x61 |             ...(5 layers)
+59x59 | 57x57 | 55x55 | 53x53 | 51x51 |             ...(5 layers)
+49x49 | 47x47 | 45x45 | 43x43 | 41x41 |             ...(5 layers)
+39x39 | 37x37 | 35x35 | 33x33 | 31x31 |             ...(5 layers)
+29x29 | 27x27 | 25x25 | 23x23 | 21x21 |             ...(5 layers)
+19x19 | 17x17 | 15x15 | 13x13 | 11x11 |             ...(5 layers)
+9x9 | 7x7 | 5x5 | 3x3 | 1x1                         ...(4 layers)
+
+                                                 --- [99 LAYERS]
